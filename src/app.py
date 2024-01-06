@@ -49,10 +49,13 @@ class App(Tk):
         self.updateButton.grid(row=5, column=3)
         self.deleteButton = Button(self, text="Delete Entry", width=12, command=self.deleteDataCommand)
         self.deleteButton.grid(row=6, column=3)
-        self.closeButton = Button(self, text="Close", width=12)
+        self.closeButton = Button(self, text="Close", width=12, command=self.closeApplication)
         self.closeButton.grid(row=7, column=3)
 
         self.mainloop()
+
+    def closeApplication(self):
+        self.destroy()
 
     def insertInputValues(self, item):
         self.titleEntry.delete(0, END)
