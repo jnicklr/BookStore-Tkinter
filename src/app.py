@@ -38,7 +38,7 @@ class App(Tk):
         self.itemsListScrollbar.configure(command=self.itemsList.yview)
         
         # Actions Buttons.
-        self.viewButton = Button(self, text="View All", width=12)
+        self.viewButton = Button(self, text="View All", width=12, command=self.viewDataCommand)
         self.viewButton.grid(row=2, column=3)
         self.searchButton = Button(self, text="Search Entry", width=12)
         self.searchButton.grid(row=3, column=3)
@@ -52,6 +52,12 @@ class App(Tk):
         self.closeButton.grid(row=7, column=3)
 
         self.mainloop()
+
+    def viewDataCommand(self):
+        query = self.dataBase.viewData()
+        self.itemsList.delete(0, END)
+        for row in query:
+            self.itemsList.insert(END, row)
 
     def insertDataCommand(self):
         title = self.titleVar.get()
