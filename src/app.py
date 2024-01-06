@@ -6,68 +6,50 @@ class App(Tk):
         super().__init__()
         self.dataBase = DataBase()
         self.title("BookStore")
-        self.createWidgets()
-        self.mainloop()
-        
-    def createWidgets(self):
         # Labels and Entrys.
-        titleLabel = Label(self, text="Title")
-        titleLabel.grid(row=0, column=0)
-
-        titleVar = StringVar()
-        titleEntry = Entry(self, textvariable=titleVar)
-        titleEntry.grid(row=0, column=1)
-
-        authorLabel = Label(self, text="Author")
-        authorLabel.grid(row=0, column=2)
-
-        authorVar = StringVar()
-        authorEntry = Entry(self, textvariable=authorVar)
-        authorEntry.grid(row=0, column=3)
-
-        yearLabel = Label(self, text="Year")
-        yearLabel.grid(row=1, column=0)
-
-        yearVar = StringVar()
-        yearEntry = Entry(self, textvariable=yearVar)
-        yearEntry.grid(row=1, column=1)
-
-        isbnLabel = Label(self, text="ISBN")
-        isbnLabel.grid(row=1, column=2)
-
-        isbnVar = StringVar()
-        isbnEntry = Entry(self, textvariable=isbnVar)
-        isbnEntry.grid(row=1, column=3)
-
+        self.titleLabel = Label(self, text="Title")
+        self.titleLabel.grid(row=0, column=0)
+        self.titleVar = StringVar()
+        self.titleEntry = Entry(self, textvariable=self.titleVar)
+        self.titleEntry.grid(row=0, column=1)
+        self.authorLabel = Label(self, text="Author")
+        self.authorLabel.grid(row=0, column=2)
+        self.authorVar = StringVar()
+        self.authorEntry = Entry(self, textvariable=self.authorVar)
+        self.authorEntry.grid(row=0, column=3)
+        self.yearLabel = Label(self, text="Year")
+        self.yearLabel.grid(row=1, column=0)
+        self.yearVar = StringVar()
+        self.yearEntry = Entry(self, textvariable=self.yearVar)
+        self.yearEntry.grid(row=1, column=1)
+        self.isbnLabel = Label(self, text="ISBN")
+        self.isbnLabel.grid(row=1, column=2)
+        self.isbnVar = StringVar()
+        self.isbnEntry = Entry(self, textvariable=self.isbnVar)
+        self.isbnEntry.grid(row=1, column=3)
+        
         # List of the items and the scrollbar.
-
-        itemsList = Listbox(self, height=6, width=35)
-        itemsList.grid(row=2, column=0, rowspan=6,columnspan=2)
-
-        itemsListScrollbar = Scrollbar(self)
-        itemsListScrollbar.grid(row=2, column=2, rowspan=6)
-
-        itemsList.configure(yscrollcommand=itemsListScrollbar.set)
-        itemsListScrollbar.configure(command=itemsList.yview)
-
+        self.itemsList = Listbox(self, height=6, width=35)
+        self.itemsList.grid(row=2, column=0, rowspan=6,columnspan=2)
+        self.itemsListScrollbar = Scrollbar(self)
+        self.itemsListScrollbar.grid(row=2, column=2, rowspan=6)
+        self.itemsList.configure(yscrollcommand=self.itemsListScrollbar.set)
+        self.itemsListScrollbar.configure(command=self.itemsList.yview)
+        
         # Actions Buttons.
+        self.viewButton = Button(self, text="View All", width=12)
+        self.viewButton.grid(row=2, column=3)
+        self.searchButton = Button(self, text="Search Entry", width=12)
+        self.searchButton.grid(row=3, column=3)
+        self.addButton = Button(self, text="Add Entry", width=12)
+        self.addButton.grid(row=4, column=3)
+        self.updateButton = Button(self, text="Update Entry", width=12)
+        self.updateButton.grid(row=5, column=3)
+        self.deleteButton = Button(self, text="Delete Entry", width=12)
+        self.deleteButton.grid(row=6, column=3)
+        self.closeButton = Button(self, text="Close", width=12)
+        self.closeButton.grid(row=7, column=3)
 
-        viewButton = Button(self, text="View All", width=12)
-        viewButton.grid(row=2, column=3)
-
-        searchButton = Button(self, text="Search Entry", width=12)
-        searchButton.grid(row=3, column=3)
-
-        addButton = Button(self, text="Add Entry", width=12)
-        addButton.grid(row=4, column=3)
-
-        updateButton = Button(self, text="Update Entry", width=12)
-        updateButton.grid(row=5, column=3)
-
-        deleteButton = Button(self, text="Delete Entry", width=12)
-        deleteButton.grid(row=6, column=3)
-
-        closeButton = Button(self, text="Close", width=12)
-        closeButton.grid(row=7, column=3)
+        self.mainloop()
 
 App()
