@@ -45,9 +45,9 @@ class App(Tk):
         self.searchButton.grid(row=3, column=3)
         self.addButton = Button(self, text="Add Entry", width=12, command=self.insertDataCommand)
         self.addButton.grid(row=4, column=3)
-        self.updateButton = Button(self, text="Update Entry", width=12)
+        self.updateButton = Button(self, text="Update Entry", width=12, command=self.updateDataCommand)
         self.updateButton.grid(row=5, column=3)
-        self.deleteButton = Button(self, text="Delete Entry", width=12)
+        self.deleteButton = Button(self, text="Delete Entry", width=12, command=self.deleteDataCommand)
         self.deleteButton.grid(row=6, column=3)
         self.closeButton = Button(self, text="Close", width=12)
         self.closeButton.grid(row=7, column=3)
@@ -100,5 +100,19 @@ class App(Tk):
 
         self.itemsList.delete(0, END)
         self.itemsList.insert(END, (title, author, year, isbn))
+
+    def deleteDataCommand(self):
+        itemId = selectedRow[0]
+        self.dataBase.deleteData(itemId)
+
+    def updateDataCommand(self):
+        id = selectedRow[0]
+        title = self.titleVar.get()
+        author = self.authorVar.get()
+        year = self.yearVar.get()
+        isbn = self.isbnVar.get()
+
+        print((id, title, author, year, isbn))
+        self.dataBase.updateData(id, title, author, year, isbn)
 
 App()
