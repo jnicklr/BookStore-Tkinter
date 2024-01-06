@@ -36,6 +36,7 @@ class App(Tk):
         self.itemsListScrollbar.grid(row=2, column=2, rowspan=6)
         self.itemsList.configure(yscrollcommand=self.itemsListScrollbar.set)
         self.itemsListScrollbar.configure(command=self.itemsList.yview)
+        self.itemsList.bind("<<ListboxSelect>>", self.getSelectedRow)
         
         # Actions Buttons.
         self.viewButton = Button(self, text="View All", width=12, command=self.viewDataCommand)
@@ -52,6 +53,25 @@ class App(Tk):
         self.closeButton.grid(row=7, column=3)
 
         self.mainloop()
+
+    def insertInputValues(self, item):
+        self.titleEntry.delete(0, END)
+        self.titleEntry.insert(END, item[1])
+        self.authorEntry.delete(0, END)
+        self.authorEntry.insert(END, item[2])
+        self.yearEntry.delete(0, END)
+        self.yearEntry.insert(END, item[3])
+        self.isbnEntry.delete(0, END)
+        self.isbnEntry.insert(END, item[4])
+
+    def getSelectedRow(self, event):
+        try:
+            global selectedRow
+            index = self.itemsList.curselection()
+            selectedRow = self.itemsList.get(index[0])
+            self.insertInputValues(selectedRow)
+        except IndexError:
+            pass
 
     def viewDataCommand(self):
         query = self.dataBase.viewData()
