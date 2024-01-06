@@ -6,6 +6,7 @@ class App(Tk):
         super().__init__()
         self.dataBase = DataBase()
         self.title("BookStore")
+
         # Labels and Entrys.
         self.titleLabel = Label(self, text="Title")
         self.titleLabel.grid(row=0, column=0)
@@ -41,7 +42,7 @@ class App(Tk):
         self.viewButton.grid(row=2, column=3)
         self.searchButton = Button(self, text="Search Entry", width=12)
         self.searchButton.grid(row=3, column=3)
-        self.addButton = Button(self, text="Add Entry", width=12)
+        self.addButton = Button(self, text="Add Entry", width=12, command=self.insertDataCommand)
         self.addButton.grid(row=4, column=3)
         self.updateButton = Button(self, text="Update Entry", width=12)
         self.updateButton.grid(row=5, column=3)
@@ -51,5 +52,16 @@ class App(Tk):
         self.closeButton.grid(row=7, column=3)
 
         self.mainloop()
+
+    def insertDataCommand(self):
+        title = self.titleVar.get()
+        author = self.authorVar.get()
+        year = self.yearVar.get()
+        isbn = self.isbnVar.get()
+
+        self.dataBase.insertData(title, author, year, isbn)
+
+        self.itemsList.delete(0, END)
+        self.itemsList.insert(END, (title, author, year, isbn))
 
 App()
