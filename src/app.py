@@ -40,7 +40,7 @@ class App(Tk):
         # Actions Buttons.
         self.viewButton = Button(self, text="View All", width=12, command=self.viewDataCommand)
         self.viewButton.grid(row=2, column=3)
-        self.searchButton = Button(self, text="Search Entry", width=12)
+        self.searchButton = Button(self, text="Search Entry", width=12, command=self.searchDataCommand)
         self.searchButton.grid(row=3, column=3)
         self.addButton = Button(self, text="Add Entry", width=12, command=self.insertDataCommand)
         self.addButton.grid(row=4, column=3)
@@ -57,6 +57,17 @@ class App(Tk):
         query = self.dataBase.viewData()
         self.itemsList.delete(0, END)
         for row in query:
+            self.itemsList.insert(END, row)
+
+    def searchDataCommand(self):
+        title = self.titleVar.get()
+        author = self.authorVar.get()
+        year = self.yearVar.get()
+        isbn = self.isbnVar.get()
+
+        searchQuery = self.dataBase.searchData(title, author, year, isbn)
+        self.itemsList.delete(0, END)
+        for row in searchQuery:
             self.itemsList.insert(END, row)
 
     def insertDataCommand(self):
